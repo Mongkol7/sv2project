@@ -1,0 +1,35 @@
+<div class="container-fluid bg-transparent d-flex align-items-center flex-wrap">
+  <div class="card product-card m-4">
+    <div class="discount-badge">-30%</div>
+    <button class="wishlist-btn">
+      <i class="bi bi-heart"></i>
+    </button>
+
+    <div class="product-image">
+      <img [src]="product.image" class="card-img-top" alt="Product Image">
+<!--      <div class="sport-badge">{{product.category}}</div>-->
+    </div>
+
+    <div class="product-details">
+      <div class="price-section d-flex flex-column justify-content-between">
+        <span class="current-price">{{product.price | dollarToKhmer | currency:'KHR':'៛'}}</span>
+        <span class="current-price2">{{product.price | currency}}</span>
+
+<!--        <span class="original-price">{{product.price | dollarToKhmer:"in"}}</span>-->
+<!--        <span class="original-price">{{product.price | khmerCurrency:"in"}}</span>-->
+      </div>
+
+      <h3 class="product-title">{{product.name}}</h3>
+      <h3 class="product-description">{{product.description}}</h3>
+      <h6 class="product-category">{{product.category}}</h6>
+
+<!--      <div class="color-options">-->
+<!--        <div class="color-circle color-yellow"></div>-->
+<!--        <div class="color-circle color-gray"></div>-->
+<!--        <div class="color-circle color-black"></div>-->
+<!--        <div class="color-circle color-dark-gray"></div>-->
+<!--        <div class="more-colors">+</div>-->
+<!--      </div>-->
+    </div>
+  </div>
+</div>
