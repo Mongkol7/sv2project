@@ -11,7 +11,7 @@
             <div *ngFor="let item of cartService.getItem(); trackBy: trackByItemId">
               <div class="row no-gutters border-bottom p-3">
                 <div class="col-md-2">
-                  <img [src]="item.imageUrl" [alt]="item.name" class="cart-item-img rounded">
+                  <img [src]="item.imageUrl" [alt]="item.name" onerror="this.src='/img_no.png';" alt="Product Image" class="cart-item-img rounded" >
                 </div>
                 <div class="col-md-4">
                   <div class="ml-3">
