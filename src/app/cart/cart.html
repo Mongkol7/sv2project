@@ -1,0 +1,134 @@
+<div class="mt-5 pt-5">
+  <div class="container my-5">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header bg-primary text-white">
+            <h4 class="mb-0"><i class="fas fa-shopping-cart mr-2"></i>Shopping Cart ({{cartService.getItem().length}})</h4>
+          </div>
+<!--Products Cart List-->
+          <div class="card-body p-0">
+            <div *ngFor="let item of cartService.getItem(); trackBy: trackByItemId">
+              <div class="row no-gutters border-bottom p-3">
+                <div class="col-md-2">
+                  <img [src]="item.imageUrl" [alt]="item.name" class="cart-item-img rounded">
+                </div>
+                <div class="col-md-4">
+                  <div class="ml-3">
+                    <h6 class="mb-1 font-weight-bold">{{item.name}}</h6>
+                    <p class="description mb-0 text-muted">{{item.description}}</p>
+                    <p class="description text-success mb-0 dollar">1 item = {{item.price | currency}}</p>
+                  </div>
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-2 d-flex align-items-center">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <button class="btn btn-outline-secondary btn-sm" type="button" (click)="decreaseQty(item)">-</button>
+                    </div>
+                    <input type="text" class="form-control form-control-sm quantity-input text-center"
+                           [value]="item.qty" readonly>
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary btn-sm" type="button" (click)="increaseQty(item)">+</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-2 d-flex align-items-center justify-content-between">
+                  <div class="d-flex flex-column">
+                    <strong class="text-primary khmer">{{(item.price * item.qty).toString() | dollarToKhmer | currency:'KHR':'៛'}}</strong>
+                    <strong class="dollar">{{(item.price * item.qty).toString() | currency}}</strong>
+                  </div>
+                  <button class="btn btn-outline-danger btn-sm ml-2" (click)="removeItem(item)">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Continue Shopping -->
+        <div class="mt-3">
+          <button class="btn btn-outline-primary" routerLink="/home">
+            <i class="fas fa-arrow-left mr-2"></i>Continue Shopping
+          </button>
+        </div>
+      </div>
+
+      <!-- Cart Summary -->
+      <div class="col-md-4">
+        <div class="card cart-summary">
+          <div class="card-header bg-white">
+            <h5 class="mb-0 text-light">Order Summary</h5>
+          </div>
+          <div class="card-body">
+            <div class="d-flex justify-content-between mb-2">
+              <span>Subtotal:</span>
+              <td class="text-success font-weight-bold">{{cartService.getTotal() | currency}}</td>
+            </div>
+            <div class="d-flex justify-content-between mb-2">
+              <span>Shipping:</span>
+              <span class="text-success">FREE</span>
+            </div>
+            <div class="d-flex justify-content-between mb-2">
+              <span>Tax:</span>
+              <span class="text-success">FREE</span>
+            </div>
+            <hr>
+            <div class="d-flex justify-content-between mb-3">
+              <strong>Total($):</strong>
+              <strong class="text-primary">{{cartService.getTotal() | currency}}</strong>
+            </div>
+            <div class="d-flex justify-content-between mb-3">
+              <strong>Total(៛):</strong>
+              <strong class="text-primary">{{cartService.getTotal() | dollarToKhmer | currency:'KHR':'៛'}}</strong>
+            </div>
+
+            <div class="mb-3">
+              <label for="promoCode" class="form-label">Promo Code</label>
+              <div class="input-group">
+                <input type="text" class="form-control" id="promoCode" placeholder="Enter code">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary" type="button">Apply</button>
+                </div>
+              </div>
+            </div>
+
+            <button class="btn btn-success btn-block btn-lg">
+              <i class="fas fa-lock mr-2"></i>Proceed to Checkout
+            </button>
+
+            <div class="mt-3 text-center">
+              <small class="text-muted">
+                <i class="fas fa-shield-alt mr-1"></i>
+                Secure checkout with SSL protection
+              </small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Payment Methods -->
+<!--        <div class="card mt-3">-->
+<!--          <div class="card-body text-center">-->
+<!--            <h6 class="mb-3">We Accept</h6>-->
+<!--            <div class="d-flex justify-content-center">-->
+<!--                              <span class="badge badge-light mx-1 p-2">-->
+<!--                                  <i class="fab fa-cc-visa fa-lg text-primary"></i>-->
+<!--                              </span>-->
+<!--              <span class="badge badge-light mx-1 p-2">-->
+<!--                                  <i class="fab fa-cc-mastercard fa-lg text-warning"></i>-->
+<!--                              </span>-->
+<!--              <span class="badge badge-light mx-1 p-2">-->
+<!--                                  <i class="fab fa-cc-amex fa-lg text-info"></i>-->
+<!--                              </span>-->
+<!--              <span class="badge badge-light mx-1 p-2">-->
+<!--                                  <i class="fab fa-paypal fa-lg text-primary"></i>-->
+<!--                              </span>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+      </div>
+    </div>
+  </div>
+</div>

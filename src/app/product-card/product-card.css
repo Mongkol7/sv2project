@@ -2,12 +2,13 @@
 .product-card {
   max-width: 300px;
   max-height: 500px;
-  margin: 50px auto;
+  margin:50px auto;
   border: none;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 15px;
   position: relative;
 }
+
 .card-img-top {
   padding-top: 30px;
   width: 100%;

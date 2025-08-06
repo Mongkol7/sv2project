@@ -1,12 +1,12 @@
 <div class="container-fluid bg-transparent d-flex align-items-center flex-wrap">
-  <div class="card product-card m-4">
-    <div class="discount-badge">-30%</div>
+  <div class="card product-card">
+    <div class="discount-badge">Stock: {{product.qty}}</div>
     <button class="wishlist-btn">
       <i class="bi bi-heart"></i>
     </button>
 
     <div class="product-image">
-      <img [src]="product.image" class="card-img-top" alt="Product Image">
+      <img [src]="product.imageUrl" class="card-img-top" onerror="this.src='/img_no.png';" alt="Product Image">
 <!--      <div class="sport-badge">{{product.category}}</div>-->
     </div>
 
@@ -21,7 +21,11 @@
 
       <h3 class="product-title">{{product.name}}</h3>
       <h3 class="product-description">{{product.description}}</h3>
-      <h6 class="product-category">{{product.category}}</h6>
+      <input type="button"
+             class="btn btn-outline-success w-100 add-to-cart-btn"
+             value="Add to Cart"
+              (click)="addToCart.emit(product)">
+
 
 <!--      <div class="color-options">-->
 <!--        <div class="color-circle color-yellow"></div>-->

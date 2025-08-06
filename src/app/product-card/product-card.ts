@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {JsonPipe, CurrencyPipe} from '@angular/common';
 import {KhmerCurrencyPipe} from '../khmer-currency-in-pipe';
 import {DollarToKhmerPipe} from '../dollar-to-khmer-pipe';
@@ -12,6 +12,11 @@ import {DollarToKhmerPipe} from '../dollar-to-khmer-pipe';
 export class ProductCard {
   //Input: for child to receieve Data(static json) from parent(app.html)
   @Input() product: any = [];
+  @Output() addToCart:any = new EventEmitter<any>();
+
+  onAddToCart(product: any){
+    return this.addToCart.emit(product);
+  }
 
   protected readonly Math = Math;
 }
