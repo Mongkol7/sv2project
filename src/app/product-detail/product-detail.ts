@@ -22,7 +22,7 @@ export class ProductDetail {
     public cartService: CartService
   ) { }
 
-  public product: any = [];
+  public product: any = null;
   public selectedQuantity: number = 1;
 
   ngOnInit(): void {
