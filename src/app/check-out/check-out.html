@@ -1,0 +1,356 @@
+<!-- Checkout Header -->
+<div class="checkout-header">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <h1><i class="fas fa-credit-card me-3"></i>Checkout</h1>
+        <p class="mb-0">Complete your order securely</p>
+      </div>
+      <div class="col-md-6 text-md-end">
+        <div class="d-flex align-items-center justify-content-md-end">
+          <i class="fas fa-shield-alt fa-2x me-2"></i>
+          <div>
+            <div class="fw-bold">SSL Secured</div>
+            <small>256-bit encryption</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Progress Steps -->
+<div class="container">
+  <div class="step-indicator">
+    <div class="step completed">
+      <div class="step-number">1</div>
+      <span>Cart</span>
+    </div>
+    <div class="step active">
+      <div class="step-number">2</div>
+      <span>Checkout</span>
+    </div>
+    <div class="step">
+      <div class="step-number">3</div>
+      <span>Payment</span>
+    </div>
+    <div class="step">
+      <div class="step-number">4</div>
+      <span>Confirmation</span>
+    </div>
+  </div>
+
+  <div class="progress mb-4">
+    <div class="progress-bar progress-bar-checkout" style="width: 50%"></div>
+  </div>
+</div>
+
+<div class="container checkout-container">
+  <div class="row">
+    <!-- Left Column - Forms -->
+    <div class="col-lg-8">
+      <!-- Contact Information -->
+      <div class="checkout-section">
+        <h4 class="section-title"><i class="fas fa-user me-2"></i>Contact Information</h4>
+        <form>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label">First Name *</label>
+              <input type="text"
+                     class="form-control"
+                     [(ngModel)]="customer.firstName"
+                     name="firstName"
+                     placeholder="Enter first name" required>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Last Name *</label>
+              <input type="text"
+                     class="form-control"
+                     [(ngModel)]="customer.lastName"
+                     name="lastName"
+                     placeholder="Enter last name" required>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Email Address *</label>
+              <input type="email"
+                     class="form-control"
+                     [(ngModel)]="customer.email"
+                     name="email"
+                     placeholder="Enter email address" required>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Phone Number *</label>
+              <input type="tel"
+                     class="form-control"
+                     [(ngModel)]="customer.phone"
+                     name="phone"
+                     placeholder="Enter phone number" required>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- Shipping Address -->
+      <div class="checkout-section">
+        <h4 class="section-title"><i class="fas fa-truck me-2"></i>Shipping Address</h4>
+        <form>
+          <div class="mb-3">
+            <label class="form-label">Street Address *</label>
+            <input type="text"
+                   class="form-control"
+                   [(ngModel)]="shipping.streetAddress"
+                   name="streetAddress"
+                   placeholder="Enter street address" required>
+          </div>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label">City *</label>
+              <input type="text"
+                     class="form-control"
+                     [(ngModel)]="shipping.city"
+                     name="city"
+                     placeholder="Enter city" required>
+            </div>
+            <div class="col-md-3 mb-3">
+              <label class="form-label">State/Province *</label>
+              <select class="form-control"
+                      [(ngModel)]="shipping.state"
+                      name="state" required>
+                <option value="">Select State</option>
+                <option value="phnom-penh">Phnom Penh</option>
+                <option value="siem-reap">Siem Reap</option>
+                <option value="battambang">Battambang</option>
+                <option value="kampong-cham">Kampong Cham</option>
+              </select>
+            </div>
+            <div class="col-md-3 mb-3">
+              <label class="form-label">ZIP Code *</label>
+              <input type="text"
+                     class="form-control"
+                     [(ngModel)]="shipping.zipCode"
+                     name="zipCode"
+                     placeholder="ZIP Code" required>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Country *</label>
+            <select class="form-control"
+                    [(ngModel)]="shipping.country"
+                    name="country" required>
+              <option value="cambodia">Cambodia</option>
+              <option value="thailand">Thailand</option>
+              <option value="vietnam">Vietnam</option>
+            </select>
+          </div>
+        </form>
+      </div>
+
+      <!-- Payment Method -->
+      <div class="checkout-section">
+        <h4 class="section-title"><i class="fas fa-credit-card me-2"></i>Payment Method</h4>
+
+        <!-- Credit Card -->
+        <div class="payment-method"
+             [class.selected]="payment.method === 'card'"
+             (click)="selectPayment('card')">
+          <div class="d-flex align-items-center">
+            <input type="radio"
+                   name="payment"
+                   value="card"
+                   [(ngModel)]="payment.method"
+                   class="me-3">
+            <div class="flex-grow-1">
+              <div class="d-flex align-items-center">
+                <i class="fas fa-credit-card fa-lg me-2 text-primary"></i>
+                <strong>Credit/Debit Card</strong>
+              </div>
+              <small class="text-muted">Secure payment with SSL encryption</small>
+            </div>
+            <div class="d-flex gap-2">
+              <i class="fab fa-cc-visa fa-lg text-primary"></i>
+              <i class="fab fa-cc-mastercard fa-lg text-warning"></i>
+              <i class="fab fa-cc-amex fa-lg text-info"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- PayPal -->
+        <div class="payment-method"
+             [class.selected]="payment.method === 'paypal'"
+             (click)="selectPayment('paypal')">
+          <div class="d-flex align-items-center">
+            <input type="radio"
+                   name="payment"
+                   value="paypal"
+                   [(ngModel)]="payment.method"
+                   class="me-3">
+            <div class="flex-grow-1">
+              <div class="d-flex align-items-center">
+                <i class="fab fa-paypal fa-lg me-2 text-primary"></i>
+                <strong>PayPal</strong>
+              </div>
+              <small class="text-muted">Pay with your PayPal account</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bank Transfer -->
+        <div class="payment-method"
+             [class.selected]="payment.method === 'bank'"
+             (click)="selectPayment('bank')">
+          <div class="d-flex align-items-center">
+            <input type="radio"
+                   name="payment"
+                   value="bank"
+                   [(ngModel)]="payment.method"
+                   class="me-3">
+            <div class="flex-grow-1">
+              <div class="d-flex align-items-center">
+                <i class="fas fa-university fa-lg me-2 text-success"></i>
+                <strong>Bank Transfer</strong>
+              </div>
+              <small class="text-muted">Direct bank transfer</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card Details Form -->
+        <div *ngIf="payment.method === 'card'" class="mt-3">
+          <div class="row">
+            <div class="col-md-12 mb-3">
+              <label class="form-label">Card Number *</label>
+              <input type="text"
+                     class="form-control"
+                     [(ngModel)]="payment.cardNumber"
+                     name="cardNumber"
+
+                     placeholder="1234 5678 9012 3456"
+                     maxlength="19">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Expiry Date *</label>
+              <input type="text"
+                     class="form-control"
+                     [(ngModel)]="payment.expiryDate"
+                     name="expiryDate"
+
+                     placeholder="MM/YY"
+                     maxlength="5">
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label">CVV *</label>
+              <input type="text"
+                     class="form-control"
+                     [(ngModel)]="payment.cvv"
+                     name="cvv"
+                     placeholder="123"
+                     maxlength="4">
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Cardholder Name *</label>
+            <input type="text"
+                   class="form-control"
+                   [(ngModel)]="payment.cardholderName"
+                   name="cardholderName"
+                   placeholder="Name on card">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column - Order Summary -->
+    <div class="col-lg-4">
+      <div class="checkout-section sticky-top">
+        <h4 class="section-title">
+          <i class="fas fa-shopping-bag me-2"></i>
+          Order Summary ({{getCartCount()}})
+        </h4>
+
+        <!-- Order Items from Cart Service -->
+        <div *ngFor="let item of getCartItems()" class="order-item">
+          <div class="d-flex align-items-center">
+            <img [src]="item.imageUrl"
+                 [alt]="item.name"
+                 onerror="this.src='/img_no.png';"
+                 class="item-image me-3">
+            <div class="flex-grow-1">
+              <h6 class="mb-1">{{item.name}}</h6>
+              <small class="text-muted">Qty: {{item.qty}}</small>
+            </div>
+            <div class="text-end">
+              <div class="fw-bold">{{(item.price * item.qty) | currency}}</div>
+              <strong class="text-primary khmer">{{(item.price * item.qty).toString() | dollarToKhmer | currency:'KHR':'៛'}}</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Order Totals -->
+        <div class="mt-3 pt-3 border-top">
+          <div class="d-flex justify-content-between mb-2">
+            <span>Subtotal:</span>
+            <span class="fw-bold">{{getSubtotal() | currency}}</span>
+          </div>
+          <div class="d-flex justify-content-between mb-2">
+            <span>Shipping:</span>
+            <span class="text-success fw-bold">FREE</span>
+          </div>
+          <div class="d-flex justify-content-between mb-2">
+            <span>Tax:</span>
+            <span class="text-success fw-bold">FREE</span>
+          </div>
+          <hr>
+          <div class="d-flex justify-content-between mb-2">
+            <strong>Total (USD):</strong>
+            <strong class="text-primary">{{getSubtotal() | currency}}</strong>
+          </div>
+          <div class="d-flex justify-content-between mb-3">
+            <strong>Total (KHR):</strong>
+            <strong class="text-primary">{{getSubtotal() | dollarToKhmer | currency:'KHR':'៛'}}</strong>
+          </div>
+        </div>
+
+        <!-- Promo Code -->
+        <div class="mb-3">
+          <label class="form-label">Promo Code</label>
+          <div class="input-group">
+            <input type="text"
+                   class="form-control"
+                   placeholder="Enter code">
+            <button class="btn btn-outline-primary"
+                    type="button">Apply</button>
+          </div>
+        </div>
+
+        <!-- Place Order Button -->
+        <button class="btn btn-place-order w-100 mb-3">
+          <i class="fas fa-lock me-2"></i>Place Order
+        </button>
+
+        <!-- Security Badges -->
+        <div class="security-badges">
+          <div class="security-badge">
+            <i class="fas fa-shield-alt text-success"></i>
+            <div>SSL Secure</div>
+          </div>
+          <div class="security-badge">
+            <i class="fas fa-undo text-info"></i>
+            <div>30-Day Return</div>
+          </div>
+        </div>
+
+        <!-- Trust Indicators -->
+        <div class="text-center mt-3">
+          <small class="text-muted">
+            <i class="fas fa-lock me-1"></i>
+            Your payment information is encrypted and secure
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

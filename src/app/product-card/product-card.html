@@ -1,14 +1,16 @@
+<!--Product Card-->
 <div class="container-fluid bg-transparent d-flex align-items-center flex-wrap">
   <div class="card product-card">
     <div class="discount-badge">Stock: {{product.qty}}</div>
     <button class="wishlist-btn">
       <i class="bi bi-heart"></i>
     </button>
-
+  <div [routerLink]="['/product-detail']" style="cursor: pointer" [queryParams]="{product_id: product.id}">
     <div class="product-image">
       <img [src]="product.imageUrl" class="card-img-top" onerror="this.src='/img_no.png';" alt="Product Image">
-<!--      <div class="sport-badge">{{product.category}}</div>-->
+      <!--      <div class="sport-badge">{{product.category}}</div>-->
     </div>
+  </div>
 
     <div class="product-details">
       <div class="price-section d-flex flex-column justify-content-between">

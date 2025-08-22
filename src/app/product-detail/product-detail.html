@@ -1,0 +1,298 @@
+
+<!-- Product Found - Show normal layout -->
+<div class="container" *ngIf="product">
+  <div class="row">
+    <div class="col-12">
+      <div class="product-container">
+        <div class="row no-gutters">
+          <!-- Product Images -->
+          <div class="col-lg-6">
+            <div class="product-image-container">
+              <img src="{{product.imageUrl}}"
+                   alt="{{product.imageUrl}}"
+                   class="main-product-image"
+                   id="mainImage">
+            </div>
+          </div>
+
+          <!-- Product Info -->
+          <div class="col-lg-6">
+            <div class="product-info">
+              <h1 class="product-title">{{product.name}}</h1>
+
+              <div class="product-rating">
+                <div class="stars">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                </div>
+                <span class="rating-count">(4.5) 248 reviews</span>
+              </div>
+
+              <div class="price-section d-flex flex-column justify-content-between mb-3">
+                <span class="current-price">{{product.price | dollarToKhmer | currency:'KHR':'៛'}}</span>
+                <span class="current-price2">{{product.price | currency}}</span>
+              </div>
+
+              <div class="stock-status">
+                <span class="stock-indicator in-stock"></span>
+                <span class="text-success font-weight-bold">In Stock - 190 available!</span>
+              </div>
+
+              <p class="product-description">
+                Premium Natural Spring Water sourced from pristine mountain springs.
+                Naturally filtered through layers of rock for the purest taste and optimal hydration.
+                Perfect for daily hydration, sports activities, or simply enjoying
+                the crisp, clean taste of natural spring water.
+              </p>
+
+              <div class="product-options">
+                <div class="option-group">
+                  <label class="option-label">Size:</label>
+                  <select class="size-select" id="sizeSelect">
+                    <option value="330ml">330ml</option>
+                    <option value="500ml" selected>500ml</option>
+                    <option value="750ml">750ml</option>
+                    <option value="1L">1L</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="quantity-selector">
+                <label class="option-label mb-0">Quantity:</label>
+                <button class="quantity-btn" (click)="changeQuantity(-1)">-</button>
+                <input type="number"
+                       class="quantity-input"
+                       [value]="selectedQuantity"
+                       (input)="onQuantityChange($event)"
+                       min="1"
+                       max="50"
+                       id="quantity">
+                <button class="quantity-btn" (click)="changeQuantity(1)">+</button>
+              </div>
+
+              <div class="action-buttons">
+                <button class="btn btn-add-to-cart" (click)="addToCart()">
+                  <i class="fas fa-shopping-cart mr-2"></i>Add to Cart
+                </button>
+                <button class="btn btn-wishlist">
+                  <i class="fas fa-heart"></i>
+                </button>
+                <button class="btn btn-compare">
+                  <i class="fas fa-balance-scale"></i>
+                </button>
+              </div>
+
+              <div class="product-features">
+                <h6 class="font-weight-bold mb-3">Key Features:</h6>
+                <div class="feature-item">
+                  <i class="fas fa-check-circle"></i>
+                  <span>100% Natural Spring Water</span>
+                </div>
+                <div class="feature-item">
+                  <i class="fas fa-check-circle"></i>
+                  <span>pH Balanced for Optimal Hydration</span>
+                </div>
+                <div class="feature-item">
+                  <i class="fas fa-check-circle"></i>
+                  <span>BPA-Free Recyclable Packaging</span>
+                </div>
+                <div class="feature-item">
+                  <i class="fas fa-check-circle"></i>
+                  <span>Rich in Essential Minerals</span>
+                </div>
+              </div>
+
+              <div class="shipping-info">
+                <div class="d-flex align-items-center mb-2">
+                  <i class="fas fa-truck text-primary mr-2"></i>
+                  <strong>Free shipping on orders over $25</strong>
+                </div>
+                <div class="d-flex align-items-center mb-2">
+                  <i class="fas fa-undo text-success mr-2"></i>
+                  <span>30-day return policy</span>
+                </div>
+                <div class="d-flex align-items-center">
+                  <i class="fas fa-shield-alt text-info mr-2"></i>
+                  <span>Quality guarantee</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Details Tabs -->
+        <div class="tabs-container px-4 pb-4">
+          <ul class="nav nav-tabs" id="productTabs" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="specs-tab" data-toggle="tab" href="#specs" role="tab">
+                Specifications
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="reviews-tab" data-toggle="tab" href="#reviews" role="tab">
+                Reviews (248)
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="shipping-tab" data-toggle="tab" href="#shipping" role="tab">
+                Shipping & Returns
+              </a>
+            </li>
+          </ul>
+
+          <div class="tab-content" id="productTabContent">
+            <!-- Specifications Tab -->
+            <div class="tab-pane fade show active" id="specs" role="tabpanel">
+              <table class="table spec-table">
+                <tr>
+                  <th>Volume</th>
+                  <td>500ml (16.9 fl oz)</td>
+                </tr>
+                <tr>
+                  <th>Source</th>
+                  <td>Natural Mountain Spring</td>
+                </tr>
+                <tr>
+                  <th>pH Level</th>
+                  <td>7.2 - 7.8 (Naturally Balanced)</td>
+                </tr>
+                <tr>
+                  <th>Minerals</th>
+                  <td>Calcium, Magnesium, Potassium, Sodium</td>
+                </tr>
+                <tr>
+                  <th>Packaging</th>
+                  <td>BPA-Free Plastic, 100% Recyclable</td>
+                </tr>
+                <tr>
+                  <th>Shelf Life</th>
+                  <td>24 months from production date</td>
+                </tr>
+                <tr>
+                  <th>Storage</th>
+                  <td>Store in cool, dry place away from direct sunlight</td>
+                </tr>
+                <tr>
+                  <th>Certifications</th>
+                  <td>FDA Approved, NSF Certified</td>
+                </tr>
+              </table>
+            </div>
+
+            <!-- Reviews Tab -->
+            <div class="tab-pane fade" id="reviews" role="tabpanel">
+              <div class="review-item">
+                <div class="review-header">
+                  <span class="reviewer-name">Sarah M.</span>
+                  <span class="review-date">August 15, 2025</span>
+                </div>
+                <div class="review-stars">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+                <p>"The best tasting water I've ever had! Clean, crisp, and refreshing. You can really taste the difference in quality. Perfect for staying hydrated throughout the day."</p>
+              </div>
+
+              <div class="review-item">
+                <div class="review-header">
+                  <span class="reviewer-name">Mike R.</span>
+                  <span class="review-date">August 12, 2025</span>
+                </div>
+                <div class="review-stars">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="far fa-star"></i>
+                </div>
+                <p>"Great quality water. I buy cases of this for my family. The pH balance is perfect and it doesn't leave any aftertaste. Only minor complaint is the price could be a bit lower."</p>
+              </div>
+
+              <div class="review-item">
+                <div class="review-header">
+                  <span class="reviewer-name">Jennifer L.</span>
+                  <span class="review-date">August 10, 2025</span>
+                </div>
+                <div class="review-stars">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+                <p>"Perfect for my daily hydration needs. Love the eco-friendly packaging and the natural mineral content. Fast delivery and excellent customer service too!"</p>
+              </div>
+
+              <button class="btn btn-outline-primary mt-3">Load More Reviews</button>
+            </div>
+
+            <!-- Shipping Tab -->
+            <div class="tab-pane fade" id="shipping" role="tabpanel">
+              <h5>Shipping Information</h5>
+              <ul class="list-unstyled">
+                <li class="mb-2"><i class="fas fa-truck text-primary mr-2"></i>Free standard shipping on orders over $25</li>
+                <li class="mb-2"><i class="fas fa-clock text-success mr-2"></i>Standard delivery: 3-5 business days</li>
+                <li class="mb-2"><i class="fas fa-bolt text-warning mr-2"></i>Express delivery: 1-2 business days (+$12.99)</li>
+                <li class="mb-2"><i class="fas fa-store text-info mr-2"></i>Same-day pickup available at select stores</li>
+              </ul>
+
+              <h5 class="mt-4">Returns & Exchanges</h5>
+              <ul class="list-unstyled">
+                <li class="mb-2"><i class="fas fa-undo text-success mr-2"></i>30-day return policy</li>
+                <li class="mb-2"><i class="fas fa-box text-primary mr-2"></i>Original packaging required for returns</li>
+                <li class="mb-2"><i class="fas fa-credit-card text-info mr-2"></i>Full refund to original payment method</li>
+                <li class="mb-2"><i class="fas fa-exchange-alt text-warning mr-2"></i>Free exchanges for defective products</li>
+              </ul>
+
+              <h5 class="mt-4">Quality Guarantee</h5>
+              <p>We stand behind the quality of our natural spring water. If you're not completely satisfied with your purchase, we offer a full refund within 30 days of purchase. No questions asked.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Product Not Found - Show overlay -->
+<div class="container" *ngIf="!product">
+  <div class="not-found-overlay">
+    <div class="space-background"></div>
+
+    <div class="stars">
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+    </div>
+
+    <div class="spaceship"></div>
+    <div class="planet"></div>
+
+    <div class="content-container">
+      <div class="error-card">
+        <div class="error-icon">
+          <i class="fas fa-exclamation-triangle"></i>
+        </div>
+        <h1 class="error-title">Product Not Found</h1>
+        <p class="error-message">
+          Sorry, the product you're looking for doesn't exist or has been moved to another galaxy.
+        </p>
+        <a href="/" class="btn-home">
+          <i class="fas fa-home me-2"></i>
+          Go Home
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

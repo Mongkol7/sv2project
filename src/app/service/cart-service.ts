@@ -1,71 +1,75 @@
+// Cart Service
 import { Injectable } from '@angular/core';
-declare const $:any;
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
+  // Constructor
   constructor() {
-    this.executeWithLoading(() => {
-      this.cart = JSON.parse(localStorage.getItem('carts') ?? '[]');
-    });
-  }
-  //private for not allow to directly access the variable, has to use function;
-  private cart:any = [];
-
-
-  //Loading Section:
-  private executeWithLoading(operation: () => void): void {
-    $.LoadingOverlay("show");
-    try {
-      operation();
-    } catch (error) {
-      console.error('Cart operation error:', error);
-    } finally {
-      $.LoadingOverlay("hide");
-    }
+    this.cart = JSON.parse(localStorage.getItem('carts') ?? '[]');
   }
 
-  addItem (item:any) {
-    item.qty = 1;
-    let dpl_index: number = this.cart.findIndex((obj: any) => obj.name === item.name);
+  private cart: any = [];
+
+  // Public methods - CRUD operations in logical order
+  addItem(item: any) {
+    let current_cart: any = JSON.parse(localStorage.getItem('carts') ?? '[]');
+    let dpl_index: number = current_cart.findIndex((obj: any) => obj.id === item.id);
+
     if (dpl_index > -1) {
-      this.cart[dpl_index].qty += 1;
+      current_cart[dpl_index].qty += 1;
+      console.log(current_cart);
+      localStorage.setItem('carts', JSON.stringify(current_cart));
     } else {
-      this.cart.push(item);
+      item.qty = 1;
+      current_cart.push(item);
+      localStorage.setItem('carts', JSON.stringify(current_cart));
     }
-    localStorage.setItem('carts', JSON.stringify(this.cart));
-  }
-  getItem():any{
-    return this.cart;
+    // Add this line to sync the cart
+    this.cart = current_cart;
   }
 
-  getTotal():any{
-    let total:number = 0;
-    this.cart.forEach((item: {price:number; qty:number; })=> {
+  getItem(): any {
+    return JSON.parse(localStorage.getItem('carts') ?? '[]');
+  }
+
+  getTotal(): any {
+    let total: number = 0;
+    const currentCart = this.getItem(); // Use getItem() to get fresh data
+    currentCart.forEach((item: { price: number; qty: number; }) => {
       total += item.price * item.qty;
     });
     return total;
   }
 
-  removeItem(item:any){
-    this.cart.splice(this.cart.indexOf(item), 1);
-    localStorage.setItem('carts', JSON.stringify(this.cart));
-  }
-
-  incrementQty(item:any){
-    let index = this.cart.indexOf(item);
-    if(index > -1){
-      this.cart[index].qty ++;
-      localStorage.setItem('carts', JSON.stringify((this.cart)));
-    }
-  }
-  decrementQty(item:any){
-    let index = this.cart.indexOf(item);
-    if(index > -1){
-      this.cart[index].qty --;
-      localStorage.setItem('carts', JSON.stringify((this.cart)));
+  removeItem(item: any) {
+    let current_cart = JSON.parse(localStorage.getItem('carts') ?? '[]');
+    const index = current_cart.findIndex((cartItem: any) => cartItem.id === item.id);
+    if (index > -1) {
+      current_cart.splice(index, 1);
+      localStorage.setItem('carts', JSON.stringify(current_cart));
+      this.cart = current_cart; // Sync the cart
     }
   }
 
+  incrementQty(item: any) {
+    let current_cart = JSON.parse(localStorage.getItem('carts') ?? '[]');
+    let index = current_cart.findIndex((cartItem: any) => cartItem.id === item.id);
+    if (index > -1) {
+      current_cart[index].qty++;
+      localStorage.setItem('carts', JSON.stringify(current_cart));
+      this.cart = current_cart; // Sync the cart
+    }
+  }
+
+  decrementQty(item: any) {
+    let current_cart = JSON.parse(localStorage.getItem('carts') ?? '[]');
+    let index = current_cart.findIndex((cartItem: any) => cartItem.id === item.id);
+    if (index > -1) {
+      current_cart[index].qty--;
+      localStorage.setItem('carts', JSON.stringify(current_cart));
+      this.cart = current_cart; // Sync the cart
+    }
+  }
 }
